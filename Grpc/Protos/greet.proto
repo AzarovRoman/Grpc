@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "Grpc";
+option csharp_namespace = "GrpcProto";
 
 service GrpcService {
   rpc GetStudentsByCourse (StudentByCourseRquest) returns (StudentsByCourseResponse);
@@ -21,5 +21,5 @@ message StudentByCourseRquest {
 }
 
 message AddStudentResponse{
-
+	int64 id = 1;
 }

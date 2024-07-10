@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Grpc.Dal.Entities;
+using GrpcProto;
 
 namespace Grpc
 {
