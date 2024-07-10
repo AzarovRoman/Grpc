@@ -8,14 +8,11 @@ namespace Grpc.Services
 {
     public class StudentService : GrpcService.GrpcServiceBase
     {
-        private readonly ILogger<StudentService> _logger;
-
         private IMapper _mapper;
         private IStudentRepository _studentRepository;
 
-        public StudentService(ILogger<StudentService> logger, IMapper mapper, IStudentRepository studenRep)
+        public StudentService(IMapper mapper, IStudentRepository studenRep)
         {
-            _logger = logger;
             _mapper = mapper;
             _studentRepository = studenRep;
         }

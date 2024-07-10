@@ -1,4 +1,5 @@
 using Grpc;
+using Grpc.Configuration;
 using Grpc.Dal;
 using Grpc.Dal.Interfaces;
 using Grpc.Dal.Repositories;
@@ -14,7 +15,10 @@ builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
 builder.Services.AddAutoMapper(typeof(GrpcMapper).Assembly);
 
-builder.Services.AddGrpc();
+builder.Services.AddGrpc(options =>
+{
+    options.Interceptors.Add<ServerLoggerInterceptor>();
+});
 
 var app = builder.Build();
 
