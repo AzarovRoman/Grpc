@@ -12,11 +12,14 @@ await Test();
 
 async Task Test()
 {
-    using var channel = GrpcChannel.ForAddress("https://localhost:7279");
-
-    var client = new GrpcService.GrpcServiceClient(channel);
-
-    await AddStudents();
+    for (int i = 1; i < 11; i++)
+    {
+        var addStudentResponse = await client.AddStudentAsync(new Student
+        {
+            Name = $"StudentName_{i}",
+            Course = i % 3
+        });
+    }
 
     var studentsResponse = await client.GetStudentsByCourseAsync(new StudentByCourseRquest
     {
@@ -44,18 +47,7 @@ async Task Test()
 
 async Task AddStudents()
 {
-    using var channel = GrpcChannel.ForAddress("https://localhost:7279");
 
-    var client = new GrpcService.GrpcServiceClient(channel);
+   
 
-    var tasks = new List<Task<AddStudentResponse>>();
-
-    for (int i = 1; i < 11; i++)
-    {
-        var addStudentResponse = client.AddStudentAsync(new Student
-        {
-            Name = $"StudentName_{i}",
-            Course = i % 3
-        });
-    }
 }

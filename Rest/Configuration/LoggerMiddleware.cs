@@ -22,9 +22,7 @@ namespace Grpc.Configuration
                 .WriteTo.Seq(_seqUrl)
                 .CreateLogger();
 
-            Log.Information("Starting receiving call. Type/Method: {Type} / {Method}", MethodType.Unary, context.Request.Method);
-
-            Log.CloseAndFlush();
+            Log.Information("Receiving request. Type/Method: {Type} / {Method}", MethodType.Unary, context.Request.Method);
 
             try
             {
@@ -32,9 +30,11 @@ namespace Grpc.Configuration
             }
             catch (Exception ex)
             {
-                Log.Error(ex, $"Error thrown by {context.Request.Method}.");
-                throw;
+                Log.Error(ex, $"Error thrown by {context.Request.Path}.");
+                throw new Exception($"Error thrown by {context.Request.Path}.");
             }
+
+            Log.CloseAndFlush();
         }
     }
 }

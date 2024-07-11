@@ -25,17 +25,18 @@ namespace Grpc.Configuration
 
             Log.Information("Starting receiving call. Type/Method: {Type} / {Method}", MethodType.Unary, context.Method);
 
-            Log.CloseAndFlush();
-
             try
             {
+                Log.CloseAndFlush();
                 return await continuation(request, context);
             }
             catch (Exception ex)
             {
+                Log.CloseAndFlush();
                 Log.Error(ex, $"Error thrown by {context.Method}.");
-                throw;
+                throw new Exception($"Error thrown by {context.Method}.");
             }
+
         }
     }
 }
