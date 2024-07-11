@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "Grpc";
+
+service GrpcService {
+  rpc GetStudentsByCourse (StudentByCourseRquest) returns (StudentsByCourseResponse);
+  rpc AddStudent (Student) returns (AddStudentResponse);
+}
+
+message Student {
+  string name = 1;
+  int32 course = 2;
+}
+
+message StudentsByCourseResponse{
+  repeated Student students = 1;
+}
+
+message StudentByCourseRquest {
+  int32 course = 1;
+}
+
+message AddStudentResponse{
+
+}
