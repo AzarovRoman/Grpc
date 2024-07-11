@@ -9,7 +9,6 @@ namespace Grpc.Dal.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         public string Name { get; set; }
-        [Range(1, 6)]
         public int Course { get; set; }
     }
 }

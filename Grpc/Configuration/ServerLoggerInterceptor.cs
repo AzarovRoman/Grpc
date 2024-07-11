@@ -6,6 +6,8 @@ namespace Grpc.Configuration
 {
     public class ServerLoggerInterceptor : Interceptor
     {
+        private const string _seqUrl = "http://localhost:5341";
+
         public ServerLoggerInterceptor()
         {
         }
@@ -18,7 +20,7 @@ namespace Grpc.Configuration
             Log.Logger = new LoggerConfiguration()
                 .Enrich.WithProperty("Application", "Grpc")
                 .WriteTo.Console()
-                .WriteTo.Seq("https://localhost:5341")
+                .WriteTo.Seq(_seqUrl)
                 .CreateLogger();
 
             Log.Information("Starting receiving call. Type/Method: {Type} / {Method}", MethodType.Unary, context.Method);

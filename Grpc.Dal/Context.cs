@@ -10,5 +10,15 @@ namespace Grpc.Dal
         public Context(DbContextOptions<Context> options) : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                entity.SetSchema("NotPublic");
+            }
+        }
     }
 }

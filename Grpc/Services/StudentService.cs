@@ -19,12 +19,13 @@ namespace Grpc.Services
 
         public override async Task<AddStudentResponse> AddStudent(Student request, ServerCallContext context)
         {
-            AddStudentResponse addedStudent = _mapper.Map<AddStudentResponse>(await _studentRepository.AddStudent(_mapper.Map<StudentEntity>(request)));
+            AddStudentResponse addedStudent =
+                _mapper.Map<AddStudentResponse>(await _studentRepository.AddStudent(_mapper.Map<StudentEntity>(request)));
 
             if (addedStudent.Id > 0)
                 return addedStudent;
             else
-                throw new Exception();
+                throw new Exception("не удалось добавить студента");
         }
 
         public override async Task<StudentsByCourseResponse> GetStudentsByCourse(StudentByCourseRquest request, ServerCallContext context)
