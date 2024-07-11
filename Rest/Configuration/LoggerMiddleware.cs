@@ -33,8 +33,10 @@ namespace Grpc.Configuration
                 Log.Error(ex, $"Error thrown by {context.Request.Path}.");
                 throw new Exception($"Error thrown by {context.Request.Path}.");
             }
-
-            Log.CloseAndFlush();
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
     }
 }

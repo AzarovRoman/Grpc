@@ -27,16 +27,17 @@ namespace Grpc.Configuration
 
             try
             {
-                Log.CloseAndFlush();
                 return await continuation(request, context);
             }
             catch (Exception ex)
             {
-                Log.CloseAndFlush();
                 Log.Error(ex, $"Error thrown by {context.Method}.");
                 throw new Exception($"Error thrown by {context.Method}.");
             }
-
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
     }
 }
